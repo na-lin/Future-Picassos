@@ -23,5 +23,5 @@ init();
 const server = app.listen(PORT, () =>
   console.log(`Mixing it up on port ${PORT}`)
 );
-const io = require("socket.io")(server);
-require("./socket")(io);
+// const io = require("socket.io")(server);
+// require("./socket")(io);

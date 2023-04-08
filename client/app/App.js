@@ -17,7 +17,7 @@ import ProductListpage from "./pages/ProductsListPage";
 import OrderDetailPage from "./pages/OrderDetailPage";
 
 // socket
-import socket from "./utils/socket";
+// import socket from "./utils/socket";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllProductsAsync, fetchOneProductAsync } from "./store";
 
@@ -25,6 +25,8 @@ const App = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const { product } = useSelector((state) => state.product);
+
+  /*
   useEffect(() => {
     socket.on("connect", () => {
       console.log("Connected");
@@ -64,6 +66,8 @@ const App = () => {
       socket.off("product/delete");
     };
   }, [product]);
+
+  */
   return (
     <div>
       <Routes>
