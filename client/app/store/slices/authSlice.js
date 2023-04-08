@@ -1,17 +1,17 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
 // @desc: get logged in user information
-export const getMe = createAsyncThunk('auth/getMe', async () => {
+export const getMe = createAsyncThunk("auth/getMe", async () => {
   try {
-    const token = JSON.parse(localStorage.getItem('jwt'));
+    const token = JSON.parse(localStorage.getItem("jwt"));
     const config = {
       headers: {
-        'Content-type': 'application/json',
+        "Content-type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     };
-    const res = await axios.get('/auth/me', config);
+    const res = await axios.get("/api/auth/me", config);
     return res.data;
   } catch (error) {
     const errMsg = error.response.data;
@@ -21,7 +21,7 @@ export const getMe = createAsyncThunk('auth/getMe', async () => {
 
 // @desc: user sign up
 export const signup = createAsyncThunk(
-  'auth/signup',
+  "auth/signup",
   async ({ name, email, password, passwordConfirm }) => {
     try {
       const body = {
@@ -30,7 +30,7 @@ export const signup = createAsyncThunk(
         password,
         passwordConfirm,
       };
-      const res = await axios.post('/auth/signup', body);
+      const res = await axios.post("/api/auth/signup", body);
       return res.data;
     } catch (error) {
       const errMsg = error.response.data;
@@ -41,14 +41,14 @@ export const signup = createAsyncThunk(
 
 // @desc: user login
 export const login = createAsyncThunk(
-  'auth/login',
+  "auth/login",
   async ({ email, password }) => {
     try {
       const body = {
         email,
         password,
       };
-      const res = await axios.post('/auth/login', body);
+      const res = await axios.post("/api/auth/login", body);
       return res.data;
     } catch (error) {
       const errMsg = error.response.data;
@@ -58,11 +58,11 @@ export const login = createAsyncThunk(
 );
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState: {
     isLoading: false,
-    user: localStorage.getItem('user')
-      ? JSON.parse(localStorage.getItem('user'))
+    user: localStorage.getItem("user")
+      ? JSON.parse(localStorage.getItem("user"))
       : null,
     error: null,
     isLogged: false,
@@ -71,8 +71,8 @@ const authSlice = createSlice({
     logout(state, action) {
       state.user = null;
       state.isLogged = false;
-      localStorage.removeItem('jwt');
-      localStorage.removeItem('user');
+      localStorage.removeItem("jwt");
+      localStorage.removeItem("user");
     },
   },
   extraReducers(builder) {
@@ -100,8 +100,8 @@ const authSlice = createSlice({
       state.user = action.payload.user;
       state.isLogged = true;
 
-      localStorage.setItem('jwt', JSON.stringify(action.payload.token));
-      localStorage.setItem('user', JSON.stringify(action.payload.user));
+      localStorage.setItem("jwt", JSON.stringify(action.payload.token));
+      localStorage.setItem("user", JSON.stringify(action.payload.user));
     });
     builder.addCase(signup.rejected, (state, action) => {
       state.isLoading = false;
@@ -116,8 +116,8 @@ const authSlice = createSlice({
       state.isLoading = false;
       state.user = action.payload.user;
       state.isLogged = true;
-      localStorage.setItem('jwt', JSON.stringify(action.payload.token));
-      localStorage.setItem('user', JSON.stringify(action.payload.user));
+      localStorage.setItem("jwt", JSON.stringify(action.payload.token));
+      localStorage.setItem("user", JSON.stringify(action.payload.user));
     });
     builder.addCase(login.rejected, (state, action) => {
       state.isLoading = false;

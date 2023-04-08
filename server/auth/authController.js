@@ -1,17 +1,17 @@
-const asyncHandler = require('express-async-handler');
+const asyncHandler = require("express-async-handler");
 const {
   models: { User },
-} = require('../db');
+} = require("../db");
 
 // @desc: Create new user
-// @route: POST /auth/signup
+// @route: POST /api/auth/signup
 // @access: Private
 const signup = asyncHandler(async (req, res, next) => {
   // 1. create user
   const { name, email, password, passwordConfirm } = req.body;
   if (!name || !email || !password || !passwordConfirm) {
     const error = new Error(
-      'Name, email, password, passwordConfirm  are required.'
+      "Name, email, password, passwordConfirm  are required."
     );
     error.status = 400;
     throw error;
@@ -20,7 +20,7 @@ const signup = asyncHandler(async (req, res, next) => {
   // check if user with this email already exist
   const existUser = await User.findOne({ where: { email } });
   if (existUser) {
-    const error = new Error('User already exists.');
+    const error = new Error("User already exists.");
     error.status = 401;
     throw error;
   }
@@ -33,7 +33,7 @@ const signup = asyncHandler(async (req, res, next) => {
   });
 
   // clear passwordConfirm field in db
-  newUser.passwordConfirm = '';
+  newUser.passwordConfirm = "";
   await newUser.save({ validate: false });
 
   // 2. create token
@@ -41,21 +41,21 @@ const signup = asyncHandler(async (req, res, next) => {
 
   // 3. send token back to client
   res.status(201).json({
-    status: 'success',
+    status: "success",
     token,
     user: newUser.excludePasswordField(),
   });
 });
 
 // @desc: Login user
-// @route: POST /auth/login
+// @route: POST /api/auth/login
 // @access: Private
 const login = asyncHandler(async (req, res, next) => {
   // 1. read email , password from req.body
   const { email, password } = req.body;
   // 2. check if email, password exist
   if (!email || !password) {
-    const error = new Error('Please provide email and password!');
+    const error = new Error("Please provide email and password!");
     error.status = 400;
     throw error;
   }
@@ -67,7 +67,7 @@ const login = asyncHandler(async (req, res, next) => {
   });
   // 4. Check if user exists && password is correct
   if (!user || !(await user.correctPassword(password))) {
-    const error = new Error('Incorrect email or password');
+    const error = new Error("Incorrect email or password");
     error.status = 401;
     throw error;
   }
@@ -76,7 +76,7 @@ const login = asyncHandler(async (req, res, next) => {
   const token = user.generateToken();
 
   res.status(200).json({
-    status: 'success',
+    status: "success",
     token,
     user: user.excludePasswordField(),
   });
@@ -90,13 +90,13 @@ const protect = asyncHandler(async (req, res, next) => {
   let token;
   if (
     req.headers.authorization &&
-    req.headers.authorization.startsWith('Bearer')
+    req.headers.authorization.startsWith("Bearer")
   ) {
-    token = req.headers.authorization.split(' ')[1];
+    token = req.headers.authorization.split(" ")[1];
   }
   if (!token) {
     const error = new Error(
-      'You are not logged in! Please log in to get access.'
+      "You are not logged in! Please log in to get access."
     );
     error.status = 401;
     throw error;
@@ -108,7 +108,7 @@ const protect = asyncHandler(async (req, res, next) => {
   //  4) check if user still exists
   if (!currentUser) {
     const error = new Error(
-      'The user belonging to this token does no longer exist.'
+      "The user belonging to this token does no longer exist."
     );
     error.status = 401;
     throw error;
@@ -117,7 +117,7 @@ const protect = asyncHandler(async (req, res, next) => {
   //  5) Check if user changed password after the token was issued
   if (currentUser.changedPasswordAfter(decode.iat)) {
     const error = new Error(
-      'User recently changed password! Please log in again'
+      "User recently changed password! Please log in again"
     );
     error.status = 401;
     throw error;
@@ -130,11 +130,11 @@ const protect = asyncHandler(async (req, res, next) => {
 });
 
 // @desc: Get currect logged in user data
-// @route: GET /auth/me
+// @route: GET /api/auth/me
 // @access: private
 const getMe = asyncHandler(async (req, res, next) => {
   res.status(200).json({
-    status: 'success',
+    status: "success",
     user: req.user.excludePasswordField(),
   });
 });
@@ -146,7 +146,7 @@ const restrictTo = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {
       const error = new Error(
-        'You do not have permission to perform this action'
+        "You do not have permission to perform this action"
       );
       error.status = 403;
       throw error;
