@@ -11,7 +11,7 @@ export const getMe = createAsyncThunk('auth/getMe', async () => {
         Authorization: `Bearer ${token}`,
       },
     };
-    const res = await axios.get('/auth/me', config);
+    const res = await axios.get('/api/auth/me', config);
     return res.data;
   } catch (error) {
     const errMsg = error.response.data;
@@ -30,7 +30,7 @@ export const signup = createAsyncThunk(
         password,
         passwordConfirm,
       };
-      const res = await axios.post('/auth/signup', body);
+      const res = await axios.post('/api/auth/signup', body);
       return res.data;
     } catch (error) {
       const errMsg = error.response.data;
@@ -48,7 +48,7 @@ export const login = createAsyncThunk(
         email,
         password,
       };
-      const res = await axios.post('/auth/login', body);
+      const res = await axios.post('/api/auth/login', body);
       return res.data;
     } catch (error) {
       const errMsg = error.response.data;
