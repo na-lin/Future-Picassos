@@ -4,7 +4,7 @@ const {
 } = require('../db');
 
 // @desc: Create new user
-// @route: POST /auth/signup
+// @route: POST /api/auth/signup
 // @access: Private
 const signup = asyncHandler(async (req, res, next) => {
   // 1. create user
@@ -48,7 +48,7 @@ const signup = asyncHandler(async (req, res, next) => {
 });
 
 // @desc: Login user
-// @route: POST /auth/login
+// @route: POST /api/auth/login
 // @access: Private
 const login = asyncHandler(async (req, res, next) => {
   // 1. read email , password from req.body
@@ -130,7 +130,7 @@ const protect = asyncHandler(async (req, res, next) => {
 });
 
 // @desc: Get currect logged in user data
-// @route: GET /auth/me
+// @route: GET /api/auth/me
 // @access: private
 const getMe = asyncHandler(async (req, res, next) => {
   res.status(200).json({
