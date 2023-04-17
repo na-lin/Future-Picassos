@@ -194,7 +194,12 @@ export default function ProductsListPage() {
 
       <Box sx={{ display: "flex", justifyContent: "space-between", m: 2 }}>
         <Typography variant="h3">Products</Typography>
-        <Button variant="contained" onClick={handleCreateProduct} sx={{ p: 1 }}>
+        <Button
+          color="success"
+          variant="contained"
+          onClick={handleCreateProduct}
+          sx={{ p: 1 }}
+        >
           <AddIcon /> <span> Create a new Product</span>
         </Button>
       </Box>
@@ -273,6 +278,7 @@ export default function ProductsListPage() {
 
                   <TableCell align="center" width="10%">
                     <IconButton
+                      color="primary"
                       aria-label="edit"
                       onClick={() => {
                         handleEditProduct(product.id);
@@ -300,7 +306,8 @@ export default function ProductsListPage() {
       </Box>
       <Stack spacing={2}>
         <Pagination
-          sx={{ mx: "auto" }}
+          color="success"
+          sx={{ mx: "auto", mt: 2 }}
           count={paginate(products).length}
           page={page + 1}
           onChange={handlePageChange}
