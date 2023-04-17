@@ -125,8 +125,9 @@ function SingleProduct() {
   return (
     <Container maxWidth="lg" sx={styles.container}>
       <Button
+        color="success"
         variant="contained"
-        sx={{ my: 4 }}
+        sx={{ my: 4, color: "common.white" }}
         onClick={() => {
           navigate("/products");
         }}
@@ -164,7 +165,12 @@ function SingleProduct() {
           </Typography>
 
           {/* CTA: Add to Cart */}
-          <Button variant="contained" onClick={handleAdd}>
+          <Button
+            variant="contained"
+            onClick={handleAdd}
+            color="success"
+            sx={{ color: "common.white" }}
+          >
             Add to cart
           </Button>
         </Box>
