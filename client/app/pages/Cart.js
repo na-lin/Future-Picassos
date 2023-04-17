@@ -139,9 +139,14 @@ const Cart = () => {
           {/* Proceed to checkout */}
         </Stack>
         <Button
+          color="success"
+          width="100%"
+          sx={{
+            color: "common.white",
+            width: "338px",
+          }}
           onClick={redirectToPayment}
           variant="contained"
-          style={{ width: "404px" }}
         >
           Proceed to Checkout
         </Button>
