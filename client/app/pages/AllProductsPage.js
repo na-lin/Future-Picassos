@@ -57,6 +57,7 @@ const AllProductsPage = () => {
       {/* Pagination */}
       <Stack>
         <Pagination
+          color="success"
           sx={{ mx: "auto" }}
           count={productsPerPage.length}
           page={page + 1}
