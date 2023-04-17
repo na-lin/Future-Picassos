@@ -179,7 +179,7 @@ export default function UsersList() {
                       },
                     }}
                   >
-                    <Icon color={user.role === "admin" ? "success" : "error"}>
+                    <Icon color={user.role === "admin" ? "warning" : "black"}>
                       {user.role === "admin" ? <CheckIcon /> : <ClearIcon />}
                     </Icon>
                   </TableCell>
@@ -193,6 +193,7 @@ export default function UsersList() {
                     }}
                   >
                     <IconButton
+                      color="error"
                       aria-label="delete"
                       onClick={() => {
                         handleDeleteUser(user.id);
@@ -210,6 +211,7 @@ export default function UsersList() {
 
       <Stack spacing={2}>
         <Pagination
+          color="secondary"
           sx={{ mx: "auto" }}
           count={paginate(users).length}
           onChange={handlePageChange}
