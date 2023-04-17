@@ -183,7 +183,7 @@ const PaymentForm = ({ orderItem, subtotal, shipping, tax, total }) => {
           />
         </Box>
         <Box sx={{ pl: 2 }}>
-          <Button color="primary" variant="contained" fullWidth type="submit">
+          <Button color="secondary" variant="contained" fullWidth type="submit">
             Checkout
           </Button>
         </Box>
