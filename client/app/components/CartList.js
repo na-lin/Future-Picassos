@@ -173,6 +173,7 @@ const CartList = ({ cartItems }) => {
                       alignItems="center"
                     >
                       <Button
+                        color="primary"
                         onClick={() => {
                           handleIncrement(item);
                         }}
@@ -188,6 +189,7 @@ const CartList = ({ cartItems }) => {
                       </Button>
                       <Typography>{item.quantity}</Typography>
                       <Button
+                        color="primary"
                         onClick={() => handleSubtract(item)}
                         sx={styles.quantity__button}
                         style={{
