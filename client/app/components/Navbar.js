@@ -184,14 +184,15 @@ const Navbar = () => {
               }}
             >
               <Badge
+                color="secondary"
                 badgeContent={cartTotal(cartItems)}
                 sx={{
-                  color: "white",
                   fontSize: {
                     xs: 16,
                     sm: 20,
                     md: 24,
                   },
+                  fontWeight: "bold",
                 }}
                 showZero
               >

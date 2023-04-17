@@ -9,6 +9,11 @@ export const customThemeOptions = createTheme({
       dark: "#0e7490",
     },
     // secondary: cyan 500/200/700
+    secondary: {
+      main: "#f97316",
+      light: "#fed7aa",
+      dark: "#c2410c",
+    },
     success: {
       main: "#f97316",
       light: "#fed7aa",
