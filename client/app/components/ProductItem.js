@@ -86,13 +86,13 @@ const ProductItem = ({ product }) => {
           to={`/products/${product.id}`}
           underline="hover"
         >
-          <Stack>
+          <Stack color="common.black">
             <Typography>{product.title}</Typography>
             <Typography>${product.price}</Typography>
           </Stack>
         </Link>
 
-        <Button onClick={handleAdd}>
+        <Button onClick={handleAdd} color="success">
           <Typography>
             <AddShoppingCartIcon />
           </Typography>
