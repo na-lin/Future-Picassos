@@ -43,10 +43,9 @@ const imagesList = [
 const HomePage = () => {
   return (
     <Fragment>
-      <CssBaseline />
       {/* Image list */}
       <Container maxWidth="false" disableGutters>
-        <Box sx={{ bgcolor: "#111", height: "100vh" }}>
+        <Box sx={{ bgcolor: "primary.dark", height: "100vh" }}>
           <ImageList
             sx={{ width: "100%", pt: 20, mt: 0 }}
             cols={5}
@@ -62,11 +61,8 @@ const HomePage = () => {
       </Container>
 
       {/* Overlap */}
-      <Backdrop
-        sx={{ color: "#111827", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={true}
-      >
-        <Container maxWidth="xl" sx={{ color: "#fff" }}>
+      <Backdrop sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }} open={true}>
+        <Container maxWidth="xl" sx={{ color: "common.white" }}>
           <Typography
             variant="h1"
             sx={{ fontWeight: "bold", textAlign: "center", mb: 6 }}
@@ -97,19 +93,15 @@ const HomePage = () => {
               children's art!
             </Typography>
             <Button
+              color="success"
               variant="contained"
               component={RouterLink}
               to="/products"
               size="large"
               sx={{
-                bgcolor: "#fff",
-                color: "#333",
+                color: "common.white",
                 px: 4,
                 py: 2,
-                "&:hover": {
-                  bgcolor: "#a3a3a3",
-                  color: "#fff",
-                },
               }}
             >
               <Typography
