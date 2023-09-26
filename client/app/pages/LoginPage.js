@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import {
   Box,
   Button,
@@ -7,22 +7,22 @@ import {
   Alert,
   Backdrop,
   CircularProgress,
-} from '@mui/material';
-import { useFormik } from 'formik';
-import * as yup from 'yup';
-import { login } from '../store';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, Link } from 'react-router-dom';
+} from "@mui/material";
+import { useFormik } from "formik";
+import * as yup from "yup";
+import { login } from "../store";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
 
 const valiate = yup.object({
   email: yup
-    .string('Enter your email')
-    .email('Enter a valid email')
-    .required('Email is required'),
+    .string("Enter your email")
+    .email("Enter a valid email")
+    .required("Email is required"),
   password: yup
-    .string('Enter your password')
-    .min(6, 'Password should be of mininum 6 characters length')
-    .required('Password is required'),
+    .string("Enter your password")
+    .min(6, "Password should be of mininum 6 characters length")
+    .required("Password is required"),
 });
 
 export default function LoginPage() {
@@ -32,10 +32,10 @@ export default function LoginPage() {
 
   const formik = useFormik({
     initialValues: {
-      name: '',
-      email: '',
-      password: '',
-      passwordConfirm: '',
+      name: "",
+      email: "",
+      password: "",
+      passwordConfirm: "",
     },
     validationSchema: valiate,
     onSubmit: (values) => {
@@ -45,7 +45,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (user) {
-      navigate('/');
+      navigate("/");
     }
   }, [user]);
 
@@ -53,21 +53,22 @@ export default function LoginPage() {
     <div>
       <Backdrop
         open={isLoading}
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
       >
-        <CircularProgress color='inherit' />
+        <CircularProgress color="inherit" />
       </Backdrop>
 
-      {!isLoading && error && <Alert severity='error'>{error}</Alert>}
+      {!isLoading && error && <Alert severity="error">{error}</Alert>}
       <form onSubmit={formik.handleSubmit}>
-        <Box display={'flex'} flexDirection={'column'}>
-          <Typography>Log In</Typography>
+        <Box display={"flex"} flexDirection={"column"} paddingX={8}>
+          <Typography variant="h3" marginBottom={4} textAlign={"center"}>
+            Log In
+          </Typography>
           <TextField
-            fullWidth
-            id='email'
-            name='email'
-            label='Email'
-            type='email'
+            id="email"
+            name="email"
+            label="Email"
+            type="email"
             value={formik.values.email}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -75,23 +76,24 @@ export default function LoginPage() {
             helperText={formik.touched.email && formik.errors.email}
           />
           <TextField
-            fullWidth
-            id='password'
-            name='password'
-            label='Password'
-            type='password'
+            id="password"
+            name="password"
+            label="Password"
+            type="password"
             value={formik.values.password}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
           />
-          <Button color='primary' variant='contained' fullWidth type='submit'>
-            Sign in
-          </Button>
-          <Typography>
+          <Box margin={0} paddingX={2}>
+            <Button color="primary" variant="contained" type="submit" fullWidth>
+              <Typography>Sign in</Typography>
+            </Button>
+          </Box>
+          <Typography padding={2}>
             If you haven't an account, please
-            <Link to='/signup'> sign up </Link>first
+            <Link to="/signup"> sign up </Link>first
           </Typography>
         </Box>
       </form>

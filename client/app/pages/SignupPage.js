@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import {
   Box,
   Button,
@@ -7,30 +7,30 @@ import {
   Alert,
   Backdrop,
   CircularProgress,
-} from '@mui/material';
-import { useFormik } from 'formik';
-import * as yup from 'yup';
-import { signup } from '../store';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, Link } from 'react-router-dom';
+} from "@mui/material";
+import { useFormik } from "formik";
+import * as yup from "yup";
+import { signup } from "../store";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
 
 const valiate = yup.object({
-  name: yup.string('Enter your name').required('Name is required'),
+  name: yup.string("Enter your name").required("Name is required"),
   email: yup
-    .string('Enter your email')
-    .email('Enter a valid email')
-    .required('Email is required'),
+    .string("Enter your email")
+    .email("Enter a valid email")
+    .required("Email is required"),
   password: yup
-    .string('Enter your password')
-    .min(6, 'Password should be of mininum 6 characters length')
-    .required('Password is required'),
+    .string("Enter your password")
+    .min(6, "Password should be of mininum 6 characters length")
+    .required("Password is required"),
   passwordConfirm: yup
-    .string('Enter your password confirm ')
+    .string("Enter your password confirm ")
     .oneOf(
-      [yup.ref('password'), null],
-      'Password and Password Confrom must match'
+      [yup.ref("password"), null],
+      "Password and Password Confrom must match"
     )
-    .required('Password Confirm is required'),
+    .required("Password Confirm is required"),
 });
 
 export default function SignupPage() {
@@ -39,10 +39,10 @@ export default function SignupPage() {
   const { isLoading, user, error } = useSelector((state) => state.auth);
   const formik = useFormik({
     initialValues: {
-      name: '',
-      email: '',
-      password: '',
-      passwordConfirm: '',
+      name: "",
+      email: "",
+      password: "",
+      passwordConfirm: "",
     },
     validationSchema: valiate,
     onSubmit: (values) => {
@@ -52,7 +52,7 @@ export default function SignupPage() {
 
   useEffect(() => {
     if (user) {
-      navigate('/');
+      navigate("/");
     }
   }, [user]);
 
@@ -60,21 +60,22 @@ export default function SignupPage() {
     <div>
       <Backdrop
         open={isLoading}
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
       >
-        <CircularProgress color='inherit' />
+        <CircularProgress color="inherit" />
       </Backdrop>
 
-      {!isLoading && error && <Alert severity='error'>{error}</Alert>}
+      {!isLoading && error && <Alert severity="error">{error}</Alert>}
       <form onSubmit={formik.handleSubmit}>
-        <Box display={'flex'} flexDirection={'column'}>
-          <Typography>Sign Up</Typography>
+        <Box display={"flex"} flexDirection={"column"} paddingX={8}>
+          <Typography variant="h3" marginBottom={4} textAlign={"center"}>
+            Sign Up
+          </Typography>
           <TextField
-            fullWidth
-            id='name'
-            name='name'
-            label='Name'
-            type='text'
+            id="name"
+            name="name"
+            label="Name"
+            type="text"
             value={formik.values.name}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -82,11 +83,10 @@ export default function SignupPage() {
             helperText={formik.touched.name && formik.errors.name}
           />
           <TextField
-            fullWidth
-            id='email'
-            name='email'
-            label='Email'
-            type='email'
+            id="email"
+            name="email"
+            label="Email"
+            type="email"
             value={formik.values.email}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -94,11 +94,10 @@ export default function SignupPage() {
             helperText={formik.touched.email && formik.errors.email}
           />
           <TextField
-            fullWidth
-            id='password'
-            name='password'
-            label='Password'
-            type='password'
+            id="password"
+            name="password"
+            label="Password"
+            type="password"
             value={formik.values.password}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -106,11 +105,10 @@ export default function SignupPage() {
             helperText={formik.touched.password && formik.errors.password}
           />
           <TextField
-            fullWidth
-            id='passwordConfirm'
-            name='passwordConfirm'
-            label='Confirm password'
-            type='password'
+            id="passwordConfirm"
+            name="passwordConfirm"
+            label="Confirm password"
+            type="password"
             value={formik.values.passwordConfirm}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -122,12 +120,14 @@ export default function SignupPage() {
               formik.touched.passwordConfirm && formik.errors.passwordConfirm
             }
           />
-          <Button color='primary' variant='contained' fullWidth type='submit'>
-            Sign up
-          </Button>
-          <Typography>
+          <Box margin={0} marginTop={2} paddingX={2}>
+            <Button color="primary" variant="contained" type="submit" fullWidth>
+              <Typography>Sign up</Typography>
+            </Button>
+          </Box>
+          <Typography padding={2}>
             If you already have an account, Let's
-            <Link to='/login'> Log in </Link>
+            <Link to="/login"> Log in </Link>
           </Typography>
         </Box>
       </form>
