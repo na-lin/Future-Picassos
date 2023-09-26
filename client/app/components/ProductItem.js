@@ -40,7 +40,6 @@ const ProductItem = ({ product }) => {
   const { cartItems } = useSelector(selectCart);
 
   const handleAdd = () => {
-    console.log("Line 41 add to cart");
     dispatch(addToCart(product));
     const req = {
       productId: product.id,
