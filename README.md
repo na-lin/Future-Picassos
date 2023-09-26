@@ -1,6 +1,6 @@
 # Future Picassos
 
-<img src="./public/readme/homepage.png" alt="home page">
+<img src="./public/readme/screenshot.gif" alt="">
 
 ## Table of Contents
 
