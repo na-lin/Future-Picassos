@@ -4,6 +4,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
+  selectCart,
   addToCart,
   addToCartDB,
   setLocalCart,
@@ -36,6 +37,7 @@ const styles = {
 const ProductItem = ({ product }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+  const { cartItems } = useSelector(selectCart);
 
   const handleAdd = () => {
     dispatch(addToCart(product));
